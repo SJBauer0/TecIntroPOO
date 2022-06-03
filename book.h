@@ -1,67 +1,120 @@
+#define BOOK_H_
+#ifdef BOOK_H_
+
+
 #include <iostream>
+
+#include <string>
+
+#include <sstream>
+
 using namespace std;
 
 class book{
-    private:
-
-    public:
-            string genre;
-            string author;
-            string title;
-            int id;
-            string available;
-            void changeAvail(string available);
-            string changeGenre(string genre);
+    protected:
+        string genre;
+        string author;
+        string title;
+        int id;
+        bool available;
+        int chapter;
         
-        book(string genre, string author, string title, int id, string available);
+    public:
+                virtual bool changeAvail(bool available);
+                //virtual string changeGenre(string genre);
+        
+                book() : id(0) , genre(""), author (""), title (""), available (true), chapter(0) {};
+                book(int id, string genre, string author, string title, bool available, int chapter):
+                id(id), genre(genre),title(title), author(author),available(available), chapter(chapter){};
+
+                int get_id(){return id;}
+                string get_genre(){return genre;}
+                string get_title(){return title;}
+                string get_author(){return author;}
+                bool get_av(){return available;}
+                int get_chapter(){return chapter;}
+                virtual string to_string();
 
 };
 
 class magazine: public book{
-    private:
-
-
-    public:
+    protected:
         int volume;
 
-        magazine(string genre, string author, string title, int id, string available, int volume);
+    public:
 
+        magazine() : book(0 , "",  "",  "",  "", true){};
+        magazine(int id, string genre, string author, string title, bool available, int volume):
+        book(id, genre,title, author,available, volume), volume(volume){};
+
+
+        int get_id(){return id;}
+        string get_genre(){return genre;}
+        string get_title(){return title;}
+        string get_author(){return author;}
+        bool get_av(){return available;}
+        int get_vol(){return volume;}
+        string to_string();
 };
 
 class encyclopedia: public book{
-    private:
+    protected:
+        int part;
 
     public:
-            string subject;
 
-        encyclopedia(string genre, string author, string title, int id, string available, string subject);
+        encyclopedia() : book(0 , "",  "",  "",  "", true){};
+        encyclopedia(int id, string genre, string author, string title, bool available, int part):
+        book(id, genre,title, author,available, part), part(part){};
+
+        int get_id(){return id;}
+        string get_genre(){return genre;}
+        string get_title(){return title;}
+        string get_author(){return author;}
+        bool get_av(){return available;}
+        int get_part(){return part;}
+        string to_string();
 
 };
 
+string book::to_string() {
 
-void book::changeAvail(string available){
-
+  stringstream aux;
+  aux << "Id: " << id << "\n" << "Genero: " << genre << "\n" << "Titulo: " << title << "\n" <<
+    "Autor: " << author << "\n" << "Disponible: " << available << "\n" << "Capitulo: " << chapter << "\n" << endl;
+  return aux.str();
 };
 
-string book::changeGenre(string genre){
+string magazine::to_string() {
 
+  stringstream aux;
+  aux << "Id: " << id << "\n" << "Genero: " << genre << "\n" << "Titulo: " << title << "\n" << 
+    "Autor: " << author << "\n" << "Disponible: " << available << "\n" << "Volumen: " << volume << "\n"<< endl;
+  return aux.str();
 };
 
-book::book(string a, string b, string c, int d, string e){
-        genre = a;
-        author = b;
-        title = c;
-        id = d;
-        available = e;
-        
+string encyclopedia::to_string() {
+
+  stringstream aux;
+  aux << "Id: " << id << "\n" << "Genero: " << genre << "\n" << "Titulo: " << title << "\n"
+    "Autor: " << author << "\n" << "Disponible: " << available << "\n" << "Parte: " << part << "\n"<< endl;
+  return aux.str();
 };
 
-int main(){
-        book book1("Fantasy", "JRR Tolkien", "The Lord of the Rings",9,"True");
-        cout << book1.title << "\n";
-        cout << book1.genre << "\n";
-        cout << book1.author << "\n";
-        cout << book1.id << "\n";
-        cout << book1.available << "\n";
-        return 0;
+bool book::changeAvail(bool available){
+    if (available == true) {
+
+            available = false;
+
+    };
+
+    if (available == false) {
+
+            available = true;
+
+    };
+
+    return available;
 };
+
+#endif
