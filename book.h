@@ -18,23 +18,35 @@ class book{
         int id;
         bool available;
         int chapter;
+
         
     public:
-                virtual bool changeAvail(bool available);
-                //virtual string changeGenre(string genre);
-        
-                book() : id(0) , genre(""), author (""), title (""), available (true), chapter(0) {};
-                book(int id, string genre, string author, string title, bool available, int chapter):
-                id(id), genre(genre),title(title), author(author),available(available), chapter(chapter){};
+            //virtual bool changeAvail(bool available);
+            book() : id(0) , genre(""), author (""), title (""), available (true), chapter(0) {};
+            book(int id, string genre, string author, string title, bool available, int chapter):
+            id(id), genre(genre),title(title), author(author),available(available), chapter(chapter){};
+            int get_chapter(){return chapter;}
+            virtual string to_string() = 0;
 
-                int get_id(){return id;}
-                string get_genre(){return genre;}
-                string get_title(){return title;}
-                string get_author(){return author;}
-                bool get_av(){return available;}
-                int get_chapter(){return chapter;}
-                virtual string to_string();
+};
 
+class libro: public book{
+    protected:
+        int chapter;
+    public:
+
+        libro() : book(0 , "",  "",  "",  "", true){};
+        libro(int id, string genre, string author, string title, bool available, int chapter):
+        book(id, genre,title, author,available, chapter), chapter(chapter){};
+
+
+        int get_id(){return id;}
+        string get_genre(){return genre;}
+        string get_title(){return title;}
+        string get_author(){return author;}
+        bool get_av(){return available;}
+        int get_chapter(){return chapter;}
+        string to_string();
 };
 
 class magazine: public book{
@@ -77,7 +89,7 @@ class encyclopedia: public book{
 
 };
 
-string book::to_string() {
+string libro::to_string() {
 
   stringstream aux;
   aux << "Id: " << id << "\n" << "Genero: " << genre << "\n" << "Titulo: " << title << "\n" <<
@@ -101,7 +113,7 @@ string encyclopedia::to_string() {
   return aux.str();
 };
 
-bool book::changeAvail(bool available){
+/* bool book::changeAvail(bool available){
     if (available == true) {
 
             available = false;
@@ -116,5 +128,6 @@ bool book::changeAvail(bool available){
 
     return available;
 };
+*/
 
 #endif
