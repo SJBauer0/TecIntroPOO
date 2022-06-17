@@ -1,0 +1,6 @@
+Para utilizar este programa utiliza los primero 4 digitos del teclado es decir 1,2,3,4.
+El menu del progrmaa saldra en la terminal
+Algunas opciones son muy largas en texto entonces te recomiendo hacer la terminal lo mas grande posible
+Para compliar este programa utiliza "g++ main.cpp" y para correrlo en mac "./a.out"
+
+Muchas gracias disfruta!
