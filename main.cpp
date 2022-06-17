@@ -1,22 +1,14 @@
-#include <iostream>
+#include <iostream> // para imprimir.
 
 #include <sstream>
 
-#include "book.h"
-
-#include "libraryDataBase.h"
+#include "admin.h"  //biblioteca con las funciones a usar
 
 using namespace std;
 
 int main(){
+    
+    menu(); //Funcion para inicializar el programa
 
-        libraryDataBase libraryDataBase;
-        libraryDataBase.add_encycl(0, "Dictionary", "Chinese Dictionary", "Beijing University", "True", 1);
-        libraryDataBase.crea_ejemplos();
-        libraryDataBase.muestra_ejemplo();
-        book book;
-        book.changeAvail(false);
-        cout << &libraryDataBase.books[1];
-        return 0;
-        
+    return 0;
 };
